@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/aop
+                        http://www.springframework.org/schema/aop/spring-aop.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd
+                        http://www.springframework.org/schema/tx
+                        http://www.springframework.org/schema/tx/spring-tx.xsd"
+                        >
+
+    <!-- 实例化事务切面类 -->
+    <bean id="mytx" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="ds"></property>
+    </bean>
+    
+    <!-- 通过AOP配置事务 -->
+    <tx:advice id="myadvice" transaction-manager="mytx">
+      <tx:attributes>
+         <!--name要被增强的方法名，可以模糊匹配,
+             isolation="DEFAULT"隔离级别和数据库保持一致
+             propagation传播行为（指定当前业务的事务环境）-->
+         <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+         <tx:method name="save*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+         <tx:method name="upda*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+         <tx:method name="del*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+      </tx:attributes>
+    </tx:advice>
+    <aop:config>
+       <aop:pointcut expression="execution(* com.offcn.*.service.*.*(..))" id="pid"/>
+       <aop:advisor advice-ref="myadvice" pointcut-ref="pid"/>
+    </aop:config>
+    
+</beans>

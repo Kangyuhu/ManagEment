@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+   <!--为实体类起别名  -->
+   <typeAliases>
+      <package name="com.offcn.cus.bean" />
+      <package name="com.offcn.pro.bean" />
+      <package name="com.offcn.emp.bean" />
+      <package name="com.offcn.ana.bean" />
+      <package name="com.offcn.mod.bean" />
+      <package name="com.offcn.fun.bean" />
+      <package name="com.offcn.att.bean" />
+      <package name="com.offcn.work.bean" />
+      <package name="com.offcn.baoxiao.bean" />
+      <package name="com.offcn.email.bean" />
+      <package name="com.offcn.duibiao.bean" />
+      <package name="com.offcn.forum.bean" />
+   </typeAliases>
+   
+   <!-- 设置分页的方言 -->
+   <!-- <plugins>
+      <plugin interceptor="com.github.pagehelper.PageInterceptor">
+         <property name="helperDialect" value="mysql"/>
+      </plugin>
+   </plugins> -->
+   
+	<!--管理映射文件，  -->
+	<!-- <mappers>
+		<package name="com.offcn.dao"/>
+	</mappers> -->
+</configuration>
